@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/induction/db" VERSION="20120925" COMMENT="XMLDB file for Moodle mod/induction"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="induction" COMMENT="Defines induction">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="true"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true"  DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="name"  TYPE="char" LENGTH="40" NOTNULL="false" SEQUENCE="false"  />
+        <FIELD NAME="intro" TYPE="text" LENGTH="small" NOTNULL="true" SEQUENCE="false" />
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true"  DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"  DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for induction"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="induction_issues" COMMENT="Info about issued inductions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="false" />
+        <FIELD NAME="idinstance" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="false" />
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="idmod" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="false"/>
+        <FIELD NAME="idtrabajador" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="false"/>
+        <FIELD NAME="nameempleado" TYPE="char" LENGTH="40" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="noempleado" TYPE="char" LENGTH="40" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="puestoempleado" TYPE="char" LENGTH="60" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="fechaingreso" TYPE="char" LENGTH="40" NOTNULL="false"  SEQUENCE="false" />
+        <FIELD NAME="idjefedirecto" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="false" />
+        <FIELD NAME="jefedirecto" TYPE="char" LENGTH="60" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="departamento" TYPE="char" LENGTH="40" NOTNULL="false" SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for induction_issues" />
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="induction_activity" COMMENT="Info about issued inductions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="true" />
+        <FIELD NAME="idind" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="false" />
+        <FIELD NAME="idinstance" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="nameactivity" TYPE="char" LENGTH="40" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="status" TYPE="char" LENGTH="40" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="date" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for induction_activity" />
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="induction_area" COMMENT="Info about issued inductions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="true" />
+        <FIELD NAME="idind" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="false" />
+        <FIELD NAME="idinstance" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="namearea" TYPE="char" LENGTH="160" NOTNULL="false" SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for induction_area" />
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="induction_files" COMMENT="Info about issued inductions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="true" />
+        <FIELD NAME="idind" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="false" />
+        <FIELD NAME="idinstance" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="filename" TYPE="char" LENGTH="80" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="ubicacion" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for induction_files" />
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="induction_functions" COMMENT="Info about issued inductions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="true" />
+        <FIELD NAME="idind" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="false" />
+        <FIELD NAME="idinstance" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="namefunction" TYPE="char" LENGTH="250" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="estatus" TYPE="char" LENGTH="15" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="date" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for induction_functions" />
+      </KEYS>
+    </TABLE>
+        <TABLE NAME="induction_processes" COMMENT="Info about issued inductions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="true" />
+        <FIELD NAME="idind" TYPE="int" LENGTH="10" NOTNULL="true"  SEQUENCE="false" />
+        <FIELD NAME="idinstance" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="nameprocesses" TYPE="char" LENGTH="250" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="estatus" TYPE="char" LENGTH="15" NOTNULL="false" SEQUENCE="false" />
+        <FIELD NAME="date" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for induction_processes" />
+      </KEYS>
+    </TABLE>
+
+  </TABLES>
+</XMLDB>
+
+
+   
+
+

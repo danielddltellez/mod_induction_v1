@@ -1,0 +1,56 @@
+    /*tabla induction*/
+div.inductiontable {
+  font-family: Verdana, Geneva, sans-serif;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+.divTable.inductiontable .divTableCell, .divTable.inductiontable .divTableHead {
+  border: 1px solid #FFFFFF;
+  padding: 5px 2px;
+}
+.divTable.inductiontable .divTableBody .divTableCell {
+  font-size: 14px;
+}
+.divTable.inductiontable .divTableRow:nth-child(even) {
+  background: #D0CDCC;
+}
+.divTable.inductiontable .divTableHeading {
+  background: #DB8877;
+  background: -moz-linear-gradient(top, #e4a699 0%, #de9484 66%, #DB8877 100%);
+  background: -webkit-linear-gradient(top, #e4a699 0%, #de9484 66%, #DB8877 100%);
+  background: linear-gradient(to bottom, #e4a699 0%, #de9484 66%, #DB8877 100%);
+}
+.divTable.inductiontable .divTableHeading .divTableHead {
+  font-size: 17px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+}
+.inductiontable .tableFootStyle {
+  font-size: 14px;
+}
+.inductiontable .tableFootStyle .links {
+	 text-align: right;
+}
+.inductiontable .tableFootStyle .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.inductiontable.outerTableFooter {
+  border-top: none;
+}
+.inductiontable.outerTableFooter .tableFootStyle {
+  padding: 3px 5px; 
+}
+/* DivTable.com */
+.divTable{ display: table; }
+.divTableRow { display: table-row; }
+.divTableHeading { display: table-header-group;}
+.divTableCell, .divTableHead { display: table-cell;}
+.divTableHeading { display: table-header-group;}
+.divTableFoot { display: table-footer-group;}
+.divTableBody { display: table-row-group;}
