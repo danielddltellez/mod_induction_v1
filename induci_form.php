@@ -26,7 +26,7 @@ class newinduction_form extends moodleform {
         FROM {user} us
         JOIN {cohort_members} mcm ON mcm.userid = us.id
         JOIN {cohort} mc ON mc.id = mcm.cohortid
-        WHERE mc.id=6 ORDER BY us.firstname ASC";
+        WHERE mc.id=13 ORDER BY us.firstname ASC";
 
         $cats = $DB->get_records_sql($sql, array(0));
 

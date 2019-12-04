@@ -54,6 +54,7 @@ mod_induction_view_activity($viewactivity);
 echo ('<div style="padding: 25px;"></div>');
 
 /* tabla nueva actividad*/
+/*
 $button = new single_button(new moodle_url('/mod/induction/activity.php', array('courseid' => $courseid, 'idinstance'=>$idinstance, 'idind'=>$id)),'Nueva inducción al puesto', $buttonadd, 'get');
 $button->class = 'singlebutton forumaddnew';
 $button->formid = 'newdiscussionform';
@@ -65,21 +66,24 @@ $qsql="select id, idind, idinstance, courseid, nameactivity, status, DATE_FORMAT
 $viewnewactivity = $DB->get_records_sql($qsql, array()); 
 
 mod_induction_view_newactivity($viewnewactivity);
-
+*/
 /* tabla area*/
-echo ('<div style="padding: 25px;"></div>');
-$button = new single_button(new moodle_url('/mod/induction/area.php', array('courseid' => $courseid, 'idinstance'=>$idinstance, 'idind'=>$id)),'Nueva área', $buttonadd, 'get');
+//echo ('<div style="padding: 25px;"></div>');
+$button = new single_button(new moodle_url('/mod/induction/area.php', array('courseid' => $courseid, 'idinstance'=>$idinstance, 'idind'=>$id)),'Agregar nuevo', $buttonadd, 'get');
 $button->class = 'singlebutton forumaddnew';
 $button->formid = 'newdiscussionform';
+if(user_has_role_assignment($USER->id, 4)){ 
 echo $OUTPUT->render($button);
+}
 
 echo ('<div style="padding: 1px;"></div>');
+
 
 $asql="select *  from mdl_induction_area where courseid='".$courseid."' and idinstance='".$idinstance."' and idind='".$id."'";
 $viewnewarea = $DB->get_records_sql($asql, array()); 
 mod_induction_view_newarea($viewnewarea);
 
-echo ('<div style="padding: 25px;"></div>');
+echo ('<div style="padding: 15px;"></div>');
 /* tabla funciones*/
 
 $esql="select id, idind, idinstance, courseid, namefunction, estatus, DATE_FORMAT(FROM_UNIXTIME(date),'%Y-%m-%d') as fechafunc, date as fechafunc2   from mdl_induction_functions where courseid='".$courseid."' and idinstance='".$idinstance."' and idind='".$id."'";
@@ -95,34 +99,40 @@ foreach($countnewfunction as $valuecount){
 
     }else{
 
-        $button = new single_button(new moodle_url('/mod/induction/funct.php', array('courseid' => $courseid, 'idinstance'=>$idinstance, 'idind'=>$id)),'Nueva Función', $buttonadd, 'get');
+        $button = new single_button(new moodle_url('/mod/induction/funct.php', array('courseid' => $courseid, 'idinstance'=>$idinstance, 'idind'=>$id)),'Agregar nuevo', $buttonadd, 'get');
         $button->class = 'singlebutton forumaddnew';
         $button->formid = 'newdiscussionform';
+        if(user_has_role_assignment($USER->id, 4)){ 
         echo $OUTPUT->render($button);
+        }
 
 
     }
 }
+echo ('<p style="text-aling:center;">*Ingresa las funciones y/o actividades correspondientes al perfil del colaborador en orden prioritario.</p>');
 echo ('<div style="padding: 1px;"></div>');
 
 mod_induction_view_newfunction($viewnewfunction);
 
-echo ('<div style="padding: 25px;"></div>');
+echo ('<div style="padding: 15px;"></div>');
 /* Tabla procesos */
 $psql="select id, idind, idinstance, courseid, nameprocesses, estatus, DATE_FORMAT(FROM_UNIXTIME(date),'%Y-%m-%d') as fechapro, date as fechapro2   from mdl_induction_processes where courseid='".$courseid."' and idinstance='".$idinstance."' and idind='".$id."'";
 $viewnewprocesses = $DB->get_records_sql($psql, array()); 
 
-$button = new single_button(new moodle_url('/mod/induction/processes.php', array('courseid' => $courseid, 'idinstance'=>$idinstance, 'idind'=>$id)),'Nuevos procesos', $buttonadd, 'get');
+$button = new single_button(new moodle_url('/mod/induction/processes.php', array('courseid' => $courseid, 'idinstance'=>$idinstance, 'idind'=>$id)),'Agregar nuevo', $buttonadd, 'get');
 $button->class = 'singlebutton forumaddnew';
 $button->formid = 'newdiscussionform';
+if(user_has_role_assignment($USER->id, 4)){ 
 echo $OUTPUT->render($button);
+}
+echo ('<p style="text-aling:center;">*Ingresa los procesos y/o procedimientos correspondientes al perfil del colaborador. Recuerda que un proceso es una serie de pasos a seguir para llegar a un objetivo, por lo cual, cada una de las entradas debe contar con los pasos necesarios para cumplir con el proceso mencionado.</p>');
 echo ('<div style="padding: 1px;"></div>');
 
 mod_induction_view_newprocesses($viewnewprocesses);
 
-echo ('<div style="padding: 25px;"></div>');
+echo ('<div style="padding: 15px;"></div>');
 /*tabla objetivo */
-
+/*
 $osql="select * from mdl_induction_objetivo where courseid='".$courseid."' and idinstance='".$idinstance."' and idind='".$id."'";
 $viewnewobjetivo = $DB->get_records_sql($osql, array()); 
 
@@ -136,29 +146,61 @@ echo ('<div style="padding: 1px;"></div>');
 mod_induction_view_newobjetivo($viewnewobjetivo);
 
 echo ('<div style="padding: 25px;"></div>');
-
+*/
 /*Tabla objetivos */
 $fsql="select id, idind, idinstance, courseid, filename, ubicacion  from mdl_induction_files where courseid='".$courseid."' and idinstance='".$idinstance."' and idind='".$id."'";
 $viewnewfile = $DB->get_records_sql($fsql, array()); 
 
-$button = new single_button(new moodle_url('/mod/induction/files.php', array('courseid' => $courseid, 'idinstance'=>$idinstance, 'idind'=>$id)),'Nuevo archivo', $buttonadd, 'get');
+$button = new single_button(new moodle_url('/mod/induction/files.php', array('courseid' => $courseid, 'idinstance'=>$idinstance, 'idind'=>$id)),'Agregar nuevo', $buttonadd, 'get');
 $button->class = 'singlebutton forumaddnew';
 $button->formid = 'newdiscussionform';
+if(user_has_role_assignment($USER->id, 4)){ 
 echo $OUTPUT->render($button);
-
+}
+echo ('<p style="text-aling:center;">*Ingresa los archivos de uso contante dentro del perfil del colaborador.</p>');
 echo ('<div style="padding: 1px;"></div>');
 
 mod_induction_view_newfile($viewnewfile);
 
-echo ('<div style="padding: 25px;"></div>');
 
+
+
+if(user_has_role_assignment($USER->id, 4)){ 
+echo ('<div style="padding: 15px;"></div>');
 echo('<center><input style="background" type="button" id="btn" value="Imprimir Inducción" onclick="printDiv();"></center>');
+echo ('<div style="padding: 15px;"></div>');
+}else if(user_has_role_assignment($USER->id, 5)){ 
+    echo ('<div style="padding: 15px;"></div>');
+    echo('<center><button style="background" type="button" ><a class="btn btn-success" data-toggle="modal" href="#validar'.$id.'">Validar formato</a></button></center>');
+    echo ('<div style="padding: 15px;"></div>');
 
-echo ('<div style="padding: 25px;"></div>');
+    echo   '<div class="modal fade" id="validar'.$id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <center><h4 class="modal-title" id="myModalLabel">Validar formato</h4></center>
+            </div>
+            <div class="modal-body">    
+                <p class="text-center">¿Esta seguro de validar el formato?</p>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                <a href="validar_formato.php?id='.$id.'" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>Borrar</a>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    ';
+}else{
+    
+}
+echo ('<div style="padding: 15px;"></div>');
 $button = new single_button(new moodle_url('/mod/induction/view.php', array('id' => '5381')),'REGRESAR', $buttonadd, 'get');
 $button->class = 'singlebutton forumaddnew';
 $button->formid = 'newdiscussionform';
-
 echo $OUTPUT->render($button);
 
 

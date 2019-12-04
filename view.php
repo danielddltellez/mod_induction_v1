@@ -80,13 +80,16 @@ echo $OUTPUT->render($button);
 
 if(user_has_role_assignment($USER->id, 1) || is_siteadmin()){
     $sql="select * from mdl_induction_issues where courseid='".$cm->course."' and idinstance='".$cm->instance."'";  
-}elseif(user_has_role_assignment($USER->id, 5)){ 
+}elseif(user_has_role_assignment($USER->id, 4)){ 
 
     $sql="select * from mdl_induction_issues where courseid='".$cm->course."' and idinstance='".$cm->instance."' and idjefedirecto='".$USER->id."'";  
 
+}elseif(user_has_role_assignment($USER->id, 5)){
+
+    $sql="select * from mdl_induction_issues where courseid='".$cm->course."' and idinstance='".$cm->instance."' and idtrabajador='".$USER->id."'";  
 }else{
 
-    echo('No existe registro');
+    echo 'No cuentas con informacion';
 }
 $viewinduction = $DB->get_records_sql($sql, array());
 $totalcount = count($viewinduction);

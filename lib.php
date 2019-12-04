@@ -129,9 +129,11 @@ function mod_induction_print_activity($viewinduction, $return = 0){
         $display .= clean_text('<strong>No. de empleado</strong>');
         $display .= html_writer::end_tag('div');
         $display .= html_writer::start_tag('div', array('class' => 'divTableHead'));
+        $display .= clean_text('<strong>Estatus</strong>');
+        $display .= html_writer::end_tag('div');
+        $display .= html_writer::start_tag('div', array('class' => 'divTableHead'));
         $display .= clean_text('<strong>Acciones</strong>');
         $display .= html_writer::end_tag('div');
-
         $display .= html_writer::end_tag('div');
         $display .= html_writer::end_tag('div');
         $display .= html_writer::start_tag('div', array('class' => 'divTableBody'));
@@ -144,9 +146,6 @@ function mod_induction_print_activity($viewinduction, $return = 0){
             $display .= html_writer::start_tag('div', array('class' => 'divTableCell'));
             $display .= clean_text($value->puestoempleado);
             $display .= html_writer::end_tag('div');
-            /*$display .= html_writer::start_tag('div', array('class' => 'divTableCell'));
-            $display .= clean_text($value->fechaingreso);
-            $display .= html_writer::end_tag('div');*/
             $display .= html_writer::start_tag('div', array('class' => 'divTableCell'));
             $display .= clean_text($value->departamento);
             $display .= html_writer::end_tag('div');
@@ -157,16 +156,29 @@ function mod_induction_print_activity($viewinduction, $return = 0){
             $display .= clean_text($value->noempleado);
             $display .= html_writer::end_tag('div');
             $display .= html_writer::start_tag('div', array('class' => 'divTableCell'));
+            if($value->status==0){
+                $display .= clean_text('Sin validar');
+            }else if($value->status==1){
+                $display .= clean_text('Validado');
+            }else{
+                $display .= clean_text('registro erroneo');
+            }
+            $display .= html_writer::end_tag('div');
+
+            $display .= html_writer::start_tag('div', array('class' => 'divTableCell'));
             $display .= html_writer::start_tag('a',array('class' => 'btn btn-success','href' => ''.$CFG->wwwroot.'/mod/induction/viewact.php?courseid='.$value->courseid.'&idinstance='.$value->idinstance.'&id='.$value->id.''));
             $display .= html_writer::start_tag('em', array('class' => 'fa fa-pencil'));
             $display .= html_writer::end_tag('em');
             $display .= html_writer::end_tag('a');
+            if(user_has_role_assignment($USER->id, 4)){ 
             $display .= html_writer::start_tag('a',array('class' => 'btn btn-danger', 'data-toggle'=>'modal', 'href' => '#delete'.$value->id.''));
             $display .= html_writer::start_tag('em', array('class' => 'fa fa-trash'));
             $display .= html_writer::end_tag('em');
             $display .= html_writer::end_tag('a');
+            }
             include('modaleditview.php');
             $display .= html_writer::end_tag('div');
+
 
             $display .= html_writer::end_tag('div');
        
@@ -180,12 +192,11 @@ function mod_induction_print_activity($viewinduction, $return = 0){
         }
 }
 
-
 function mod_induction_view_activity($viewactivity, $return = 0){
     global $OUTPUT, $USER, $DB, $CFG;
 
 
-/*Header y datos*/
+        /*Header y datos*/
 
        $display .= html_writer::start_tag('div', array('class' => 'induction-container'));
        $display .= html_writer::start_tag('div', array('class' => 'induction-container-1'));
@@ -232,7 +243,7 @@ function mod_induction_view_activity($viewactivity, $return = 0){
        $display .= html_writer::end_tag('div');
 
 
-/*Tabla cursos*/
+        /*Tabla cursos*/
        $display .= html_writer::start_tag('div', array('class' => 'divTable inductiontable'));
 
        $display .= html_writer::start_tag('div', array('class' => 'divTableHeading'));
@@ -300,8 +311,6 @@ function mod_induction_view_activity($viewactivity, $return = 0){
        }
 }
 
-
-
 function mod_induction_view_newactivity($viewnewactivity, $return = 0){
     global $OUTPUT, $USER, $DB, $CFG;
     $display .= html_writer::start_tag('div', array('class' => 'divTable inductiontable'));
@@ -348,7 +357,7 @@ function mod_induction_view_newactivity($viewnewactivity, $return = 0){
     include('modaleditactivity.php');
     $display .= html_writer::end_tag('div');
     $display .= html_writer::end_tag('div');
-}
+    }
     $display .= html_writer::end_tag('div');
     $display .= html_writer::end_tag('div');
 
@@ -366,7 +375,7 @@ function mod_induction_view_newfunction($viewnewfunction, $return = 0){
     $display .= html_writer::start_tag('div', array('class' => 'divTableHeading'));
     $display .= html_writer::start_tag('div', array('class' => 'divTableRow'));
     $display .= html_writer::start_tag('div', array('class' => 'divTableHead','style'=> 'width: 33%;'));
-    $display .= clean_text('<strong>Funciones</strong>');
+    $display .= clean_text('<strong>Funciones | Actividades</strong>');
     $display .= html_writer::end_tag('div');
     $display .= html_writer::start_tag('div', array('class' => 'divTableHead','style'=> 'width: 33%;'));
     $display .= clean_text('<strong>Estatus</strong>');
@@ -374,9 +383,11 @@ function mod_induction_view_newfunction($viewnewfunction, $return = 0){
     $display .= html_writer::start_tag('div', array('class' => 'divTableHead','style'=> 'width: 24%;'));
     $display .= clean_text('<strong>Fecha</strong>');
     $display .= html_writer::end_tag('div');
+    if(user_has_role_assignment($USER->id, 4)){ 
     $display .= html_writer::start_tag('div', array('class' => 'divTableHead acciones','style'=> 'width: 10%;'));
     $display .= clean_text('<strong>Acciones</strong>');
     $display .= html_writer::end_tag('div');
+    }
     $display .= html_writer::end_tag('div');
     $display .= html_writer::end_tag('div');
     $display .= html_writer::start_tag('div', array('class' => 'divTableBody'));
@@ -391,6 +402,7 @@ function mod_induction_view_newfunction($viewnewfunction, $return = 0){
     $display .= html_writer::start_tag('div', array('class' => 'divTableCell'));
     $display .= clean_text($valoresf->fechafunc);
     $display .= html_writer::end_tag('div');
+    if(user_has_role_assignment($USER->id, 4)){ 
     $display .= html_writer::start_tag('div', array('class' => 'divTableCell acciones'));
     $display .= html_writer::start_tag('a',array('class' => 'btn btn-success', 'data-toggle'=>'modal','href' => '#edit_function'.$valoresf->id.''));
     $display .= html_writer::start_tag('em', array('class' => 'fa fa-pencil'));
@@ -402,8 +414,9 @@ function mod_induction_view_newfunction($viewnewfunction, $return = 0){
     $display .= html_writer::end_tag('a');
     include('modaleditfunction.php');
     $display .= html_writer::end_tag('div');
+    }
     $display .= html_writer::end_tag('div');
-}
+    }
     $display .= html_writer::end_tag('div');
     $display .= html_writer::end_tag('div');
 
@@ -421,7 +434,7 @@ function mod_induction_view_newprocesses($viewnewprocesses, $return = 0){
     $display .= html_writer::start_tag('div', array('class' => 'divTableHeading'));
     $display .= html_writer::start_tag('div', array('class' => 'divTableRow'));
     $display .= html_writer::start_tag('div', array('class' => 'divTableHead','style'=> 'width: 33%;'));
-    $display .= clean_text('<strong>Procesos y procedimiento de mi puesto</strong>');
+    $display .= clean_text('<strong>Procesos | Procedimientos de mi puesto</strong>');
     $display .= html_writer::end_tag('div');
     $display .= html_writer::start_tag('div', array('class' => 'divTableHead','style'=> 'width: 33%;'));
     $display .= clean_text('<strong>Estatus</strong>');
@@ -429,9 +442,11 @@ function mod_induction_view_newprocesses($viewnewprocesses, $return = 0){
     $display .= html_writer::start_tag('div', array('class' => 'divTableHead','style'=> 'width: 24%;'));
     $display .= clean_text('<strong>Fecha</strong>');
     $display .= html_writer::end_tag('div');
+    if(user_has_role_assignment($USER->id, 4)){ 
     $display .= html_writer::start_tag('div', array('class' => 'divTableHead acciones','style'=> 'width: 10%;'));
     $display .= clean_text('<strong>Acciones</strong>');
     $display .= html_writer::end_tag('div');
+    }
     $display .= html_writer::end_tag('div');
     $display .= html_writer::end_tag('div');
     $display .= html_writer::start_tag('div', array('class' => 'divTableBody'));
@@ -446,6 +461,7 @@ function mod_induction_view_newprocesses($viewnewprocesses, $return = 0){
     $display .= html_writer::start_tag('div', array('class' => 'divTableCell'));
     $display .= clean_text($valoresp->fechapro);
     $display .= html_writer::end_tag('div');
+    if(user_has_role_assignment($USER->id, 4)){ 
     $display .= html_writer::start_tag('div', array('class' => 'divTableCell acciones'));
     $display .= html_writer::start_tag('a',array('class' => 'btn btn-success', 'data-toggle'=>'modal','href' => '#edit_processes'.$valoresp->id.''));
     $display .= html_writer::start_tag('em', array('class' => 'fa fa-pencil'));
@@ -457,8 +473,9 @@ function mod_induction_view_newprocesses($viewnewprocesses, $return = 0){
     $display .= html_writer::end_tag('a');
     include('modaleditprocesses.php');
     $display .= html_writer::end_tag('div');
+    }
     $display .= html_writer::end_tag('div');
-}
+    }
     $display .= html_writer::end_tag('div');
     $display .= html_writer::end_tag('div');
 
@@ -481,9 +498,11 @@ function mod_induction_view_newarea($viewnewarea, $return = 0){
     $display .= html_writer::start_tag('div', array('class' => 'divTableHead','style'=> 'width: 60%;'));
     $display .= clean_text('<strong>Descripción</strong>');
     $display .= html_writer::end_tag('div');
+    if(user_has_role_assignment($USER->id, 4)){ 
     $display .= html_writer::start_tag('div', array('class' => 'divTableHead acciones','style'=> 'width: 10%;'));
     $display .= clean_text('<strong>Acciones</strong>');
     $display .= html_writer::end_tag('div');
+    }
     $display .= html_writer::end_tag('div');
     $display .= html_writer::end_tag('div');
     $display .= html_writer::start_tag('div', array('class' => 'divTableBody'));
@@ -495,6 +514,7 @@ function mod_induction_view_newarea($viewnewarea, $return = 0){
     $display .= html_writer::start_tag('div', array('class' => 'divTableCell'));
     $display .= clean_text($valoresa->description);
     $display .= html_writer::end_tag('div');
+    if(user_has_role_assignment($USER->id, 4)){ 
     $display .= html_writer::start_tag('div', array('class' => 'divTableCell acciones'));
     $display .= html_writer::start_tag('a',array('class' => 'btn btn-success', 'data-toggle'=>'modal','href' => '#edit_area'.$valoresa->id.''));
     $display .= html_writer::start_tag('em', array('class' => 'fa fa-pencil'));
@@ -506,8 +526,9 @@ function mod_induction_view_newarea($viewnewarea, $return = 0){
     $display .= html_writer::end_tag('a');
     include('modaleditarea.php');
     $display .= html_writer::end_tag('div');
+    }
     $display .= html_writer::end_tag('div');
-}
+    }
     $display .= html_writer::end_tag('div');
     $display .= html_writer::end_tag('div');
 
@@ -530,9 +551,11 @@ function mod_induction_view_newfile($viewnewfile, $return = 0){
     $display .= html_writer::start_tag('div', array('class' => 'divTableHead','style'=> 'width: 35%;'));
     $display .= clean_text('<strong>Ubicacion del archivo</strong>');
     $display .= html_writer::end_tag('div');
+    if(user_has_role_assignment($USER->id, 4)){ 
     $display .= html_writer::start_tag('div', array('class' => 'divTableHead acciones','style'=> 'width: 15%;'));
     $display .= clean_text('<strong>Acciones</strong>');
     $display .= html_writer::end_tag('div');
+    }
     $display .= html_writer::end_tag('div');
     $display .= html_writer::end_tag('div');
     $display .= html_writer::start_tag('div', array('class' => 'divTableBody'));
@@ -544,6 +567,7 @@ function mod_induction_view_newfile($viewnewfile, $return = 0){
     $display .= html_writer::start_tag('div', array('class' => 'divTableCell'));
     $display .= clean_text($valoresfi->ubicacion);
     $display .= html_writer::end_tag('div');
+    if(user_has_role_assignment($USER->id, 4)){ 
     $display .= html_writer::start_tag('div', array('class' => 'divTableCell acciones'));
     $display .= html_writer::start_tag('a',array('class' => 'btn btn-success', 'data-toggle'=>'modal','href' => '#edit_files'.$valoresfi->id.''));
     $display .= html_writer::start_tag('em', array('class' => 'fa fa-pencil'));
@@ -555,8 +579,9 @@ function mod_induction_view_newfile($viewnewfile, $return = 0){
     $display .= html_writer::end_tag('a');
     include('modaleditfiles.php');
     $display .= html_writer::end_tag('div');
+    }
     $display .= html_writer::end_tag('div');
-}
+    }
     $display .= html_writer::end_tag('div');
     $display .= html_writer::end_tag('div');
 
@@ -567,7 +592,6 @@ function mod_induction_view_newfile($viewnewfile, $return = 0){
         echo $display;
         }
 }
-
 
 function mod_induction_view_newobjetivo($viewnewobjetivo, $return = 0){
     global $OUTPUT, $USER, $DB, $CFG;
@@ -618,7 +642,7 @@ function mod_induction_view_newobjetivo($viewnewobjetivo, $return = 0){
     include('modaleditobjetivos.php');
     $display .= html_writer::end_tag('div');
     $display .= html_writer::end_tag('div');
-}
+    }
     $display .= html_writer::end_tag('div');
     $display .= html_writer::end_tag('div');
 
