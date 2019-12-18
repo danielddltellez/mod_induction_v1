@@ -55,6 +55,7 @@ mod_induction_view_activity($viewactivity,$estatus);
 
 
 echo ('<div style="padding: 25px;"></div>');
+/*
 $button = new single_button(new moodle_url('/mod/induction/area.php', array('courseid' => $courseid, 'idinstance'=>$idinstance, 'idind'=>$id)),'Agregar nuevo', $buttonadd, 'get');
 $button->class = 'singlebutton forumaddnew';
 $button->formid = 'newdiscussionform';
@@ -73,6 +74,8 @@ $viewnewarea = $DB->get_records_sql($asql, array());
 
 mod_induction_view_newarea($viewnewarea, $estatus);
 echo ('<div style="padding: 15px;"></div>');
+
+*/
 /* tabla funciones*/
 $esql="select id, idind, idinstance, courseid, namefunction, estatus, DATE_FORMAT(FROM_UNIXTIME(date),'%Y-%m-%d') as fechafunc, date as fechafunc2   from mdl_induction_functions where courseid='".$courseid."' and idinstance='".$idinstance."' and idind='".$id."'";
 $viewnewfunction = $DB->get_records_sql($esql, array()); 
